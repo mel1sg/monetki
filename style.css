@@ -1,200 +1,101 @@
-/* === ОСНОВНЫЙ СТИЛЬ === */
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Segoe UI', 'Roboto', sans-serif;
-  background: linear-gradient(to bottom, #e6f7e6, #ffffff);
-  color: #2e4d2e;
-}
-
-header {
-  background: linear-gradient(135deg, #a8e6a3, #d2f8d2);
-  color: #1c3f1c;
-  padding: 70px 20px;
-  text-align: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-header h1 {
-  font-size: 2.5em;
-  margin-bottom: 10px;
-}
-
-header p {
-  font-size: 1.2em;
-  opacity: 0.9;
-}
-
-/* === ГАЛЕРЕЯ === */
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 30px;
-  padding: 50px 30px;
-  max-width: 1200px;
-  margin: auto;
-}
-
-.item {
-  background: rgba(255, 255, 255, 0.6);
-  border-radius: 20px;
-  box-shadow: 0 8px 24px rgba(50, 100, 50, 0.1);
-  overflow: hidden;
-  text-align: center;
-  transition: all 0.4s ease;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-.item:hover {
-  background: rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 12px 30px rgba(50, 100, 50, 0.2);
-  transform: translateY(-6px);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-}
-
+/* === ОПТИМИЗАЦИЯ ИЗОБРАЖЕНИЙ === */
 .item img {
   width: 100%;
-  height: 220px;
+  height: 180px;
   object-fit: cover;
   border-radius: 12px;
   margin-bottom: 15px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  /* Оптимизация загрузки */
+  loading: lazy;
+  background: #f5f5f5;
+  aspect-ratio: 1/1;
 }
 
-.item h3 {
-  font-size: 1.1em;
-  margin: 10px 0 15px;
-  color: #1c3f1c;
-}
-
-.buy-button {
-  display: inline-block;
-  padding: 12px 20px;
-  margin-top: auto;
-  background: linear-gradient(135deg, #c5f7b9, #9be7a4);
-  color: #1c3f1c;
-  font-weight: bold;
-  font-size: 1em;
-  text-decoration: none;
-  border-radius: 50px;
-  transition: all 0.2s ease;
-  box-shadow: 0 4px 10px rgba(100, 180, 100, 0.3);
-}
-
-.buy-button:hover {
-  background: linear-gradient(135deg, #b2f0a0, #83d68f);
-  transform: scale(1.05);
-}
-
-/* === QR === */
-.qr {
-  text-align: center;
-  background-color: #e5fbe5;
-  padding: 60px 20px;
-  border-top: 2px solid #d3f2d3;
-  border-bottom: 2px solid #d3f2d3;
-}
-
-.qr h2 {
-  font-size: 1.8em;
-  color: #2c4c2c;
-  margin-bottom: 10px;
-}
-
-.qr p {
-  font-size: 1.1em;
-  color: #3c6e3c;
-}
-
-.qr img {
-  margin-top: 20px;
-  max-width: 180px;
-  border-radius: 16px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-}
-
-/* === FOOTER === */
-footer {
-  background-color: #2d4d2d;
-  color: #eafcea;
-  text-align: center;
-  padding: 40px 20px;
-}
-
-footer .icons img {
-  width: 40px;
-  margin: 0 10px;
-  filter: brightness(0.9);
-  transition: transform 0.2s ease, filter 0.2s ease;
-}
-
-footer .icons img:hover {
-  transform: scale(1.1);
-  filter: brightness(1.2);
-}
-
-footer p {
-  margin: 10px 0;
-}
-
-.footer-note {
-  margin-top: 15px;
-  font-size: 0.9em;
-  opacity: 0.7;
-}
-
-/* === АДАПТИВНОСТЬ ДЛЯ МОБИЛЬНЫХ === */
+/* === АДАПТИВНАЯ ВЕРСИЯ === */
 @media (max-width: 600px) {
+  /* Улучшенная производительность */
+  body {
+    background: #ffffff;
+  }
+  
+  header {
+    padding: 40px 15px;
+    background: #d2f8d2;
+  }
+
   header h1 {
     font-size: 1.8em;
+    line-height: 1.3;
   }
 
   header p {
     font-size: 1em;
+    margin: 0 auto;
+    max-width: 90%;
   }
 
+  /* Оптимизация галереи */
   .gallery {
-    padding: 30px 15px;
+    grid-template-columns: 1fr;
+    padding: 20px 15px;
     gap: 20px;
   }
 
-  .item img {
-    height: 180px;
+  .item {
+    padding: 15px;
+    border-radius: 16px;
   }
 
-  .item h3 {
-    font-size: 1em;
+  .item img {
+    height: auto;
+    max-height: 200px;
+    min-height: 150px;
+  }
+
+  /* Упрощение анимаций */
+  .item:hover {
+    transform: none;
+    background: rgba(255, 255, 255, 0.6);
   }
 
   .buy-button {
     padding: 10px 16px;
-    font-size: 0.95em;
+    font-size: 0.9em;
+  }
+
+  /* Оптимизация QR секции */
+  .qr {
+    padding: 30px 15px;
   }
 
   .qr h2 {
     font-size: 1.4em;
   }
 
-  .qr p {
-    font-size: 1em;
-  }
-
   .qr img {
     max-width: 140px;
   }
 
-  footer .icons img {
-    width: 34px;
-    margin: 0 6px;
+  /* Упрощение футера */
+  footer {
+    padding: 30px 15px;
   }
 
-  .footer-note {
-    font-size: 0.8em;
+  footer .icons img {
+    width: 32px;
+    margin: 0 5px;
+  }
+}
+
+/* Дополнительные оптимизации для медленных соединений */
+@media (max-width: 600px) and (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+  
+  .item:hover {
+    transform: none !important;
   }
 }
