@@ -1,32 +1,90 @@
-/* Основные стили */
+/* Основные стили с серой темой */
 body {
   margin: 0;
   padding: 0;
   font-family: 'Segoe UI', 'Roboto', sans-serif;
-  background: linear-gradient(to bottom, #e6f7e6, #ffffff);
-  color: #2e4d2e;
+  background: #1a1a1a; /* Темно-серый фон */
+  color: #e0e0e0; /* Светло-серый текст */
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Волнистые неоновые линии на фоне */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    linear-gradient(90deg, #1a1a1a 20px, transparent 1%) center,
+    linear-gradient(#1a1a1a 20px, transparent 1%) center,
+    rgba(100, 255, 150, 0.05); /* Светло-зеленый неоновый оттенок */
+  background-size: 22px 22px;
+  opacity: 0.15;
+  z-index: -1;
 }
 
 /* Заголовок */
-header {
-  background: linear-gradient(135deg, #a8e6a3, #d2f8d2);
-  color: #1c3f1c;
+.neon-header {
+  background: #1a1a1a; /* Темно-серый фон */
+  color: #e0e0e0;
   padding: 70px 20px;
   text-align: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid rgba(100, 255, 150, 0.2); /* Светло-зеленая граница */
+  position: relative;
+  overflow: hidden;
 }
 
-header h1 {
+.neon-header::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(100, 255, 150, 0.7), transparent);
+  animation: neonGlow 3s linear infinite;
+}
+
+@keyframes neonGlow {
+  0% { opacity: 0.3; }
+  50% { opacity: 1; }
+  100% { opacity: 0.3; }
+}
+
+.neon-header h1 {
   font-size: 2.8em;
   margin-bottom: 10px;
+  color: #e0e0e0;
+  text-shadow: 0 0 5px #64ff96, 0 0 15px rgba(100, 255, 150, 0.5);
+  letter-spacing: 2px;
+  position: relative;
+  display: inline-block;
 }
 
-header p {
+.neon-header h1::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: rgba(100, 255, 150, 0.5);
+  box-shadow: 0 0 10px #64ff96;
+}
+
+.neon-header p {
   font-size: 1.2em;
   opacity: 0.9;
+  text-shadow: 0 0 5px rgba(100, 255, 150, 0.3);
+  letter-spacing: 1px;
 }
 
-/* Галерея */
+/* Галерея с карточками */
 .gallery {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -37,11 +95,9 @@ header p {
 }
 
 .item {
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(30, 30, 30, 0.8); /* Темно-серый фон */
   border-radius: 20px;
-  box-shadow: 0 8px 24px rgba(50, 100, 50, 0.1);
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
   overflow: hidden;
   text-align: center;
   transition: all 0.4s ease;
@@ -49,18 +105,16 @@ header p {
   flex-direction: column;
   justify-content: space-between;
   padding: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(100, 255, 150, 0.1); /* Светло-зеленая граница */
+  position: relative;
 }
 
 .item:hover {
-  background: rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 12px 30px rgba(50, 100, 50, 0.2);
+  background: rgba(40, 40, 40, 0.9); /* Более светлый серый при наведении */
+  box-shadow: 0 12px 30px rgba(100, 255, 150, 0.2);
   transform: translateY(-6px);
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(100, 255, 150, 0.3);
 }
-
 
 .item img {
   width: 100%;
@@ -68,88 +122,180 @@ header p {
   object-fit: cover;
   border-radius: 12px;
   margin-bottom: 15px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+  border: 1px solid rgba(100, 255, 150, 0.1);
+}
+
+.item:hover img {
+  transform: scale(1.03);
+  box-shadow: 0 0 15px rgba(100, 255, 150, 0.3);
 }
 
 .item h3 {
-  font-size: 1.1em;
+  font-size: 1.3em;
   margin: 10px 0 15px;
-  color: #1c3f1c;
+  color: #ffffff;
+  text-shadow: 0 0 8px rgba(100, 255, 150, 0.5);
+  letter-spacing: 1px;
+  position: relative;
+  padding-bottom: 8px;
 }
 
-/* Кнопка обмена */
+.item h3::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 25%;
+  width: 50%;
+  height: 1px;
+  background: rgba(100, 255, 150, 0.5);
+  box-shadow: 0 0 5px #64ff96;
+}
+
+/* Неоновые кнопки */
 .buy-button {
   display: inline-block;
   padding: 12px 20px;
   margin-top: auto;
-  background: linear-gradient(135deg, #c5f7b9, #9be7a4);
-  color: #1c3f1c;
+  background: rgba(30, 80, 50, 0.3);
+  color: #64ff96; /* Светло-зеленый неон */
   font-weight: bold;
   font-size: 1em;
   text-decoration: none;
   border-radius: 50px;
-  transition: all 0.2s ease;
-  box-shadow: 0 4px 10px rgba(100, 180, 100, 0.3);
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px #64ff96, 0 0 20px rgba(100, 255, 150, 0.3);
+  border: 1px solid #64ff96;
+  position: relative;
+  overflow: hidden;
+  letter-spacing: 1px;
 }
 
 .buy-button:hover {
-  background: linear-gradient(135deg, #b2f0a0, #83d68f);
+  background: rgba(40, 120, 70, 0.4);
   transform: scale(1.05);
+  box-shadow: 0 0 15px #64ff96, 0 0 30px rgba(100, 255, 150, 0.5);
+  text-shadow: 0 0 5px #64ff96;
 }
 
-/* QR-блок */
-.qr {
+.buy-button::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to bottom right,
+    rgba(100, 255, 150, 0) 0%,
+    rgba(100, 255, 150, 0.1) 50%,
+    rgba(100, 255, 150, 0) 100%
+  );
+  transform: rotate(30deg);
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  0% { transform: rotate(30deg) translate(-30%, -30%); }
+  100% { transform: rotate(30deg) translate(30%, 30%); }
+}
+
+/* Секции */
+.neon-section {
   text-align: center;
-  background-color: #e5fbe5;
+  background-color: #1a1a1a; /* Темно-серый фон */
   padding: 60px 20px;
-  border-top: 2px solid #d3f2d3;
-  border-bottom: 2px solid #d3f2d3;
+  border-top: 1px solid rgba(100, 255, 150, 0.1);
+  border-bottom: 1px solid rgba(100, 255, 150, 0.1);
+  position: relative;
 }
 
-.qr h2 {
-  font-size: 1.8em;
-  color: #2c4c2c;
-  margin-bottom: 10px;
+.neon-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, transparent 48%, rgba(100, 255, 150, 0.03) 49%, rgba(100, 255, 150, 0.03) 51%, transparent 52%),
+              linear-gradient(-45deg, transparent 48%, rgba(100, 255, 150, 0.03) 49%, rgba(100, 255, 150, 0.03) 51%, transparent 52%);
+  background-size: 10px 10px;
+  opacity: 0.3;
+  pointer-events: none;
 }
 
-.qr p {
-  font-size: 1.1em;
-  color: #3c6e3c;
+.neon-section h2 {
+  font-size: 2em;
+  color: #ffffff;
+  margin-bottom: 20px;
+  text-shadow: 0 0 10px #64ff96, 0 0 20px rgba(100, 255, 150, 0.3);
+  letter-spacing: 2px;
+  position: relative;
+  display: inline-block;
 }
 
-.qr img {
+.neon-section h2::after {
+  content: "";
+  position: aleft;
+  bottom: -8px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: rgba(100, 255, 150, 0.5);
+  box-shadow: 0 0 10px #64ff96;
+}
+
+.neon-qr {
   margin-top: 20px;
   max-width: 180px;
   border-radius: 16px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 15px rgba(100, 255, 150, 0.5), 0 0 30px rgba(100, 255, 150, 0.2);
+  transition: transform 0.3s ease;
+  border: 1px solid rgba(100, 255, 150, 0.3);
+}
+
+.neon-qr:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #64ff96, 0 0 40px rgba(100, 255, 150, 0.3);
 }
 
 /* Подвал */
-footer {
-  background-color: #2d4d2d;
-  color: #eafcea;
+.neon-footer {
+  background-color: #1a1a1a; /* Темно-серый фон */
+  color: #e0e0e0;
   text-align: center;
   padding: 40px 20px;
+  border-top: 1px solid rgba(100, 255, 150, 0.1);
+  position: relative;
 }
 
-footer .icons img {
+.neon-footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #64ff96, transparent);
+  box-shadow: 0 0 10px #64ff96;
+}
+
+.neon-icon {
   width: 40px;
   margin: 0 10px;
-  filter: brightness(0.9);
-  transition: transform 0.2s ease, filter 0.2s ease;
+  filter: drop-shadow(0 0 5px #64ff96);
+  transition: all 0.3s ease;
 }
 
-footer .icons img:hover {
-  transform: scale(1.1);
-  filter: brightness(1.2);
-}
-
-footer p {
-  margin: 10px 0;
+.neon-icon:hover {
+  transform: scale(1.2);
+  filter: drop-shadow(0 0 10px #64ff96) brightness(1.2);
 }
 
 .footer-note {
   margin-top: 15px;
   font-size: 0.9em;
   opacity: 0.7;
+  text-shadow: 0 0 5px rgba(100, 255, 150, 0.3);
 }
